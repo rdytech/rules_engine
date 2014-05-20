@@ -9,8 +9,10 @@ class RulesEngine::Walker
   def walk
     node = root
     loop do
+      break if node.is_a?(RulesEngine::Action)
       node = node.execute(object)
-      break unless node
     end
+
+    node.execute(object)
   end
 end

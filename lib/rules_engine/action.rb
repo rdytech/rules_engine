@@ -6,7 +6,7 @@ class RulesEngine::Action
   end
 
   def execute(object)
-    puts "executing: #{action}"
-    nil
+    # TODO: perform the action on the object
+    "executing: #{action}"
   end
 end
