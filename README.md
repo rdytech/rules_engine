@@ -1,5 +1,8 @@
 # Enterprise Rules Engine
 
+[![Code Climate](https://codeclimate.com/github/jobready/rules_engine.png)](https://codeclimate.com/github/jobready/rules_engine)
+
+
 An enterprise rules engine for all your needs
 
 
