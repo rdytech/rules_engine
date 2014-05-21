@@ -21,10 +21,10 @@ Or install it yourself as:
 
 Require everything
 
-    ```Ruby
-    require 'rules_engine'
-    RulesEngine.new
-    ```
+```ruby
+require 'rules_engine'
+RulesEngine.new
+```
 
 ## Contributing
 
