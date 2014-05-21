@@ -1,6 +1,7 @@
 # Enterprise Rules Engine
 
 [![Code Climate](https://codeclimate.com/github/jobready/rules_engine.png)](https://codeclimate.com/github/jobready/rules_engine)
+[![Build Status](https://travis-ci.org/jobready/rules_engine.svg)](https://travis-ci.org/jobready/rules_engine)
 
 
 An enterprise rules engine for all your needs
