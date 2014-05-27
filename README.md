@@ -28,9 +28,9 @@ Require everything
 ```ruby
 require 'rules_engine'
 
-true_action = RulesEngine::Action.new("true action")
-false_action = RulesEngine::Action.new("false action")
-tree = RulesEngine::Condition.new("2 > 1", true_action, false_action)
+true_outcome = RulesEngine::Outcome.new("true outcome")
+false_outcome = RulesEngine::Outcome.new("false outcome")
+tree = RulesEngine::Condition.new("2 > 1", true_outcome, false_outcome)
 walker = RulesEngine::Walker.new(tree, nil)
 ```
 
