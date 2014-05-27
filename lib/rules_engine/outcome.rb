@@ -8,7 +8,6 @@ class RulesEngine::Outcome
 
   def execute(object, logger)
     logger << "Performing action #{category}, #{parameter}"
-    # TODO: perform the action on the object
-    "executing: #{category}, #{parameter}"
+    RulesEngine::Evaluator.new(parameter, object).evaluate
   end
 end
