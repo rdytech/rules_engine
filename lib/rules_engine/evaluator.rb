@@ -7,6 +7,6 @@ class RulesEngine::Evaluator
   end
 
   def evaluate
-    object.instance_eval(condition)
+    BooleanDsl::Evaluator.new(condition, object).outcome
   end
 end
