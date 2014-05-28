@@ -28,10 +28,12 @@ Require everything
 ```ruby
 require 'rules_engine'
 
-true_outcome = RulesEngine::Outcome.new("true outcome")
-false_outcome = RulesEngine::Outcome.new("false outcome")
-tree = RulesEngine::Condition.new("2 > 1", true_outcome, false_outcome)
-walker = RulesEngine::Walker.new(tree, nil)
+true_outcome = RulesEngine::Outcome.new("some category", "true outcome")
+false_outcome = RulesEngine::Outcome.new("some category", "false outcome")
+root_rule = RulesEngine::Condition.new("2 > 1", true_outcome, false_outcome)
+set = RulesEngine::Set.new(root_rule, "rule set name")
+walker = RulesEngine::Walker.new([set], some_object)
+walker.walk
 ```
 
 ## Contributing
