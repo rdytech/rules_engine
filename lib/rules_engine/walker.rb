@@ -23,7 +23,7 @@ class RulesEngine::Walker
   def walk_root(root)
     node = root
     loop do
-      break unless node.is_a?(RulesEngine::Condition) || node.is_a?(RulesEngine::Outcome)
+      break unless node.is_a?(RulesEngine::Condition)
       node = node.execute(object, logger)
     end
 

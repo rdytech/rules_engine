@@ -5,9 +5,4 @@ class RulesEngine::Outcome
     @category = category
     @parameter = parameter
   end
-
-  def execute(object, logger)
-    logger << "Performing action #{category}, #{parameter}"
-    RulesEngine::Evaluator.new(parameter, object).evaluate
-  end
 end
