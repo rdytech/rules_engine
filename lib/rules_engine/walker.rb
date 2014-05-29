@@ -1,5 +1,6 @@
 class RulesEngine::Walker
   attr_reader :sets, :object
+  class_attribute :logger
 
   def initialize(sets, object)
     @sets = sets
@@ -8,12 +9,12 @@ class RulesEngine::Walker
 
   def walk
     sets.each do |set|
-      logger << "Executing Rule Set #{set.name}"
+      logger.info("Executing Rule Set #{set.name}")
 
       result = walk_root(set.root)
 
       if result.nil?
-        logger << "Going to next Rule Set"
+        logger.info("Going to next Rule Set")
       else
         return result
       end
@@ -29,9 +30,4 @@ class RulesEngine::Walker
 
     node
   end
-
-  def logger
-    @logger ||= []
-  end
-
 end
