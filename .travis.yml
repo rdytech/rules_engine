@@ -4,4 +4,4 @@ rvm:
 cache:
   - bundler
   - apt
-bundler_args: -j4 --without development production --quiet
+bundler_args: -j4 --quiet
