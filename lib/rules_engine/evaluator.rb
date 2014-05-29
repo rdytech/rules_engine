@@ -13,6 +13,10 @@ class RulesEngine::Evaluator
       logger.error("Parslet::ParseFailed")
       logger.error("Condition was: #{condition}")
       logger.error(error.cause.ascii_tree)
+    rescue BooleanDsl::EvaluationFailed => error
+      logger.error("BooleanDsl::EvaluationFailed")
+      logger.error("Condition was: #{condition}")
+      logger.error(error.message)
     end
   end
 end

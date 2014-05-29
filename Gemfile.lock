@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/jobready/boolean_dsl.git
-  revision: 490aaa41a0c9c858c8aeddb1f9a70f9972c82442
+  revision: 1bcae98d336d2f975851a2d689ee6d7cfa463c15
   branch: develop
   specs:
     boolean_dsl (0.0.1)
