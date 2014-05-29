@@ -1,8 +1,8 @@
 class RulesEngine::Outcome
-  attr_accessor :category, :parameter
+  attr_accessor :reference, :parameter
 
-  def initialize(category, parameter)
-    @category = category
+  def initialize(reference, parameter)
+    @reference = reference
     @parameter = parameter
   end
 end
