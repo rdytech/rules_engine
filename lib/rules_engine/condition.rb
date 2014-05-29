@@ -8,7 +8,7 @@ class RulesEngine::Condition
   end
 
   def execute(object, logger)
-    if RulesEngine::Evaluator.new(condition, object).evaluate
+    if RulesEngine::Evaluator.new(condition, object).evaluate(logger)
       logger << "Evaluating condition #{condition}, result is true"
       when_true
     else
