@@ -6,6 +6,7 @@
 
 An enterprise rules engine for all your needs
 
+Uses the [Boolean DSL](https://github.com/jobready/boolean_dsl) gem for handling logic
 
 ## Installation
 
