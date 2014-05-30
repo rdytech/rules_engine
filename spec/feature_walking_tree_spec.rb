@@ -10,7 +10,7 @@ describe "walking the tree" do
     it "executes the action" do
       walker = RulesEngine::Walker.new([set], nil)
 
-      expect(walker.walk).to eq(root)
+      expect(walker.walk).to eq(set => root)
     end
   end
   
@@ -21,13 +21,13 @@ describe "walking the tree" do
     context "executes the true action" do
       let(:root) { RulesEngine::Condition.new("2 > 1", true_action, false_action) }
 
-      specify { expect(walker.walk).to eq(true_action) }
+      specify { expect(walker.walk).to eq(set => true_action) }
     end
 
     context "executes the false action" do
       let(:root) { RulesEngine::Condition.new("2 < 1", true_action, false_action) }
 
-      specify { expect(walker.walk).to eq(false_action) }
+      specify { expect(walker.walk).to eq(set => false_action) }
     end
   end
 end
