@@ -6,18 +6,18 @@ class RulesEngine::Evaluator
     @object = object
   end
 
-  def evaluate(logger)
+  def evaluate
     begin
       BooleanDsl::Evaluator.new(condition, object).outcome
     rescue Parslet::ParseFailed => error
-      logger.error("Parslet::ParseFailed")
-      logger.error("Condition was: #{condition}")
-      logger.error(error.cause.ascii_tree)
+      RulesEngine::Walker.logger.error("Parslet::ParseFailed")
+      RulesEngine::Walker.logger.error("Condition was: #{condition}")
+      RulesEngine::Walker.logger.error(error.cause.ascii_tree)
       raise error
     rescue BooleanDsl::EvaluationFailed => error
-      logger.error("BooleanDsl::EvaluationFailed")
-      logger.error("Condition was: #{condition}")
-      logger.error(error.message)
+      RulesEngine::Walker.logger.error("BooleanDsl::EvaluationFailed")
+      RulesEngine::Walker.logger.error("Condition was: #{condition}")
+      RulesEngine::Walker.logger.error(error.message)
       raise error
     end
   end
