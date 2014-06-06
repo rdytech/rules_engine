@@ -1,20 +1,19 @@
 class RulesEngine::Condition
-  attr_accessor :condition, :when_true, :when_false
+  attr_accessor :name, :condition, :when_true, :when_false
 
-  def initialize(condition = nil, when_true = nil, when_false = nil)
+  def initialize(name = nil, condition = nil, when_true = nil, when_false = nil)
+    @name = name
     @condition = condition
     @when_true = when_true
     @when_false = when_false
   end
 
-  def execute(object, logger)
-    if RulesEngine::Evaluator.new(condition, object).evaluate(logger)
-      logger.info("Evaluating condition #{condition}, result is true")
-      when_true
-    else
-      logger.info("Evaluating condition #{condition}, result is false")
-      when_false
-    end
+  def execute(object)
+    RulesEngine::Evaluator.new(condition, object).evaluate
+  end
+
+  def outcome(which)
+    which ? when_true : when_false
   end
 end
 
