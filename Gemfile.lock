@@ -10,7 +10,7 @@ GIT
 PATH
   remote: .
   specs:
-    rules_engine (0.0.1)
+    rules_engine (1.0.0)
       activesupport
       boolean_dsl
 

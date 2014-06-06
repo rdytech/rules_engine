@@ -21,19 +21,17 @@ class RulesEngine::Walker
 
     node = set.root
     loop do
+      unless node.is_a?(RulesEngine::Condition)
+        event_logger.add_event(set, node, '') if node
+        return node
+      end
+
       which = node.execute(object)
       logger.info("Evaluated condition #{node.condition}, result is #{which}")
 
       event_logger.add_event(set, node, which.to_s)
 
-      outcome = node.outcome(which)
-
-      unless outcome.is_a?(RulesEngine::Condition)
-        event_logger.add_event(set, outcome, '') if outcome
-        return outcome
-      end
-
-      node = outcome
+      node = node.outcome(which)
     end
   end
 end
