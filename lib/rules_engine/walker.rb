@@ -2,10 +2,10 @@ class RulesEngine::Walker
   attr_reader :sets, :object, :event_logger
   class_attribute :logger
 
-  def initialize(sets, object, event_logger)
-    @sets = Array(sets)
-    @object = object
-    @event_logger = event_logger
+  def initialize(options = {})
+    @sets = Array(options.fetch(:set))
+    @object = options.fetch(:object) { }
+    @event_logger = options.fetch(:event_logger)
   end
 
   def walk
