@@ -3,7 +3,7 @@ class RulesEngine::Walker
   class_attribute :logger
 
   def initialize(sets, object, event_logger)
-    @sets = sets
+    @sets = Array(sets)
     @object = object
     @event_logger = event_logger
   end
