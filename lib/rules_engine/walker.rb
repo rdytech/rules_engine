@@ -4,7 +4,7 @@ class RulesEngine::Walker
 
   def initialize(options = {})
     @sets = Array(options.fetch(:set))
-    @object = options.fetch(:object) { }
+    @object = options.fetch(:object, nil)
     @event_logger = options.fetch(:event_logger)
   end
 

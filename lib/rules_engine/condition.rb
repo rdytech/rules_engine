@@ -4,12 +4,12 @@ class RulesEngine::Condition
   def initialize(options = {})
     @name = options.fetch(:name)
     @condition = options.fetch(:condition)
-    @when_true = options.fetch(:when_true) { }
-    @when_false = options.fetch(:when_false) { }
+    @when_true = options.fetch(:when_true, nil)
+    @when_false = options.fetch(:when_false, nil)
   end
 
   def execute(object)
-    RulesEngine::Evaluator.new(condition:condition, object:object).evaluate
+    RulesEngine::Evaluator.new(condition: condition, object: object).evaluate
   end
 
   def outcome(which)
