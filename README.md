@@ -28,12 +28,15 @@ Require everything
 
 ```ruby
 require 'rules_engine'
+    @name = options.fetch(:name)
+    @reference = options.fetch(:reference)
+    @parameter = options.fetch(:parameter)
 
-true_outcome = RulesEngine::Outcome.new("some category", "true outcome")
-false_outcome = RulesEngine::Outcome.new("some category", "false outcome")
-root_rule = RulesEngine::Condition.new("2 > 1", true_outcome, false_outcome)
-set = RulesEngine::Set.new(root_rule, "rule set name")
-walker = RulesEngine::Walker.new([set], some_object)
+true_outcome = RulesEngine::Outcome.new(reference:'some category', name:'true outcome',parameter:'some parameter')
+false_outcome = RulesEngine::Outcome.new(reference:'some category', 'name:false outcome', parameter:'another parameter')
+root_rule = RulesEngine::Condition.new(name:'condition name', condition:'2 > 1', when_true:true_outcome, when_false:false_outcome)
+set = RulesEngine::Set.new(root:root_rule, name:'rule set name')
+walker = RulesEngine::Walker.new(set:set, object:some_object)
 walker.walk
 ```
 

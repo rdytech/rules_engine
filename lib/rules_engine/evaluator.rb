@@ -1,9 +1,9 @@
 class RulesEngine::Evaluator
   attr_reader :condition, :object
 
-  def initialize(condition, object)
-    @condition = condition
-    @object = object
+  def initialize(options = {})
+    @condition = options.fetch(:condition)
+    @object = options.fetch(:object)
   end
 
   def evaluate

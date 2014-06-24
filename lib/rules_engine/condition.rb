@@ -1,15 +1,25 @@
 class RulesEngine::Condition
-  attr_accessor :name, :condition, :when_true, :when_false
+  attr_accessor :name, :condition, :when_true, :when_false, :original, :override
 
-  def initialize(name = nil, condition = nil, when_true = nil, when_false = nil)
-    @name = name
-    @condition = condition
-    @when_true = when_true
-    @when_false = when_false
+  def initialize(options = {})
+    @name = options.fetch(:name)
+    @condition = options.fetch(:condition)
+    @when_true = options.fetch(:when_true, nil)
+    @when_false = options.fetch(:when_false, nil)
+    @original = options.fetch(:original, nil)
+    @override = options.fetch(:override, nil)
+  end
+
+  def override?
+    !override.nil?
   end
 
   def execute(object)
-    RulesEngine::Evaluator.new(condition, object).evaluate
+    if override?
+      override
+    else
+      RulesEngine::Evaluator.new(condition: condition, object: object).evaluate
+    end
   end
 
   def outcome(which)

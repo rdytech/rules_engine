@@ -2,10 +2,10 @@ class RulesEngine::Walker
   attr_reader :sets, :object, :event_logger
   class_attribute :logger
 
-  def initialize(sets, object, event_logger)
-    @sets = sets
-    @object = object
-    @event_logger = event_logger
+  def initialize(options = {})
+    @sets = Array(options.fetch(:set))
+    @object = options.fetch(:object, nil)
+    @event_logger = options.fetch(:event_logger)
   end
 
   def walk
@@ -22,14 +22,14 @@ class RulesEngine::Walker
     node = set.root
     loop do
       unless node.is_a?(RulesEngine::Condition)
-        event_logger.add_event(set, node, '') if node
+        event_logger.add_event(set, node, nil) if node
         return node
       end
 
       which = node.execute(object)
-      logger.info("Evaluated condition #{node.condition}, result is #{which}")
+      logger.info("Evaluated condition #{node.condition}, result is #{which} (overridden: #{node.override?})")
 
-      event_logger.add_event(set, node, which.to_s)
+      event_logger.add_event(set, node, which)
 
       node = node.outcome(which)
     end
