@@ -22,16 +22,18 @@ class RulesEngine::Walker
     node = set.root
     loop do
       unless node.is_a?(RulesEngine::Condition)
-        event_logger.add_event(set, node, nil) if node
+        add_event(set, node, nil) if node
         return node
       end
 
       which = node.execute(object)
       logger.info("Evaluated condition #{node.condition}, result is #{which} (overridden: #{node.override?})")
-
-      event_logger.add_event(set, node, which)
-
+      add_event(set, node, which)
       node = node.outcome(which)
     end
+  end
+
+  def add_event(set, node, which)
+    event_logger.add_event(set, node, which) if event_logger
   end
 end
