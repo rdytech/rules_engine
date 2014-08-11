@@ -11,7 +11,7 @@ describe 'walking the tree' do
   let(:walker) { RulesEngine::Walker.new(set: set, event_logger: event_logger) }
 
   context 'for a tree 1 level deep (only a root action)' do
-    let(:root) { RulesEngine::Outcome.new(name: 'name', reference: 'an action', parameter: '1') }
+    let(:root) { RulesEngine::Outcome.new(name: 'name', values: [{ reference: 'an action', parameter: '1' }]) }
 
     it 'executes the action' do
       walker = RulesEngine::Walker.new(set: set, event_logger: event_logger)
@@ -21,8 +21,8 @@ describe 'walking the tree' do
   end
 
   context 'for a tree 2 levels deep' do
-    let(:true_action) { RulesEngine::Outcome.new(name: 'name', reference: 'true action', parameter: '1') }
-    let(:false_action) { RulesEngine::Outcome.new(name: 'name', reference: 'false action', parameter: '1') }
+    let(:true_action) { RulesEngine::Outcome.new(name: 'name', values: [{ reference: 'true action', parameter: '1' }]) }
+    let(:false_action) { RulesEngine::Outcome.new(name: 'name', values: [{ reference: 'false action', parameter: '1' }]) }
 
     context 'executes the true action' do
       let(:root) { RulesEngine::Condition.new(name: 'name', condition: '2 > 1', when_true: true_action, when_false: false_action) }

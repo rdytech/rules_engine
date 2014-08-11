@@ -1,9 +1,8 @@
 class RulesEngine::Outcome
-  attr_accessor :name, :reference, :parameter
+  attr_accessor :name, :values
 
   def initialize(options = {})
     @name = options.fetch(:name)
-    @reference = options.fetch(:reference)
-    @parameter = options.fetch(:parameter)
+    @values = options.fetch(:values)
   end
 end

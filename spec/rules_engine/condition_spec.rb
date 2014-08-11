@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe 'Condition' do
-  let(:true_action) { RulesEngine::Outcome.new(name: 'name', reference: 'true action', parameter: '1') }
-  let(:false_action) { RulesEngine::Outcome.new(name: 'name', reference: 'false action', parameter: '1') }
+  let(:true_action) { RulesEngine::Outcome.new(name: 'name', values: [{ reference: 'true action', parameter: '1' }]) }
+  let(:false_action) { RulesEngine::Outcome.new(name: 'name', values: [{ reference: 'false action', parameter: '1' }]) }
 
   context 'Constructing a new instance from a hash' do
 
