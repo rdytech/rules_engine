@@ -1,14 +1,14 @@
 class RulesEngine::Evaluator
-  attr_reader :condition, :object
+  attr_reader :condition, :context
 
   def initialize(options = {})
     @condition = options.fetch(:condition)
-    @object = options.fetch(:object)
+    @context = options.fetch(:context)
   end
 
   def evaluate
     begin
-      BooleanDsl::Evaluator.new(condition, object).outcome
+      BooleanDsl::Evaluator.new(condition, context).outcome
     rescue Parslet::ParseFailed => error
       RulesEngine::Walker.logger.error("Parslet::ParseFailed")
       RulesEngine::Walker.logger.error("Condition was: #{condition}")

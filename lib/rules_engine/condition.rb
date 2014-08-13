@@ -14,11 +14,11 @@ class RulesEngine::Condition
     !override.nil?
   end
 
-  def execute(object)
+  def execute(context)
     if override?
       override
     else
-      RulesEngine::Evaluator.new(condition: condition, object: object).evaluate
+      RulesEngine::Evaluator.new(condition: condition, context: context).evaluate
     end
   end
 
