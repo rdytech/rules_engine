@@ -4,9 +4,14 @@ describe 'Outcome' do
 
   context 'Constructing a new instance from a hash' do
 
-    let(:outcome) { RulesEngine::Outcome.new(name: 'some outcome', values: [{ parameter: 'some parameter', reference: 'some reference' }]) }
+    let(:outcome) do
+      RulesEngine::Outcome.new(name: 'some outcome',
+        reference: 'outcome_reference',
+        values: [{ parameter: 'some parameter', reference: 'some reference' }])
+    end
 
     specify { expect(outcome.name).to eq('some outcome') }
+    specify { expect(outcome.reference).to eq('outcome_reference') }
     specify { expect(outcome.values.first[:parameter]).to eq('some parameter') }
     specify { expect(outcome.values.first[:reference]).to eq('some reference') }
   end
