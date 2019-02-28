@@ -1,5 +1,10 @@
 class RulesEngine::Condition
-  attr_accessor :name, :condition, :when_true, :when_false, :original, :override
+  attr_accessor :name,
+                :condition,
+                :when_true,
+                :when_false,
+                :original,
+                :override
 
   def initialize(options = {})
     @name = options.fetch(:name)
