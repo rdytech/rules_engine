@@ -1,12 +1,9 @@
 require 'simplecov'
 SimpleCov.start
 
-require "codeclimate-test-reporter"
-CodeClimate::TestReporter.start
-
-SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(
   SimpleCov::Formatter::HTMLFormatter
-]
+)
 
 SimpleCov.configure do
   add_filter '/spec/'
@@ -21,7 +18,7 @@ RSpec.configure do |config|
   config.filter_run :focus
   config.filter_run_excluding perf: true
   config.order = 'random'
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
 end
 
 require_relative 'factories.rb'
