@@ -18,7 +18,7 @@ RSpec.configure do |config|
   config.filter_run :focus
   config.filter_run_excluding perf: true
   config.order = 'random'
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
 end
 
 require_relative 'factories.rb'
