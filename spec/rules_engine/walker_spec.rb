@@ -86,7 +86,8 @@ describe RulesEngine::Walker do
   describe "#walk_set" do
     subject { walker.walk_set(set) }
 
-    let(:rule_set) { RulesEngine::Set.new(name: "Rule Set", root: root) }
+    let(:rule_set) { RulesEngine::Set.new(name: "Rule Set", root: root, multiple_outcomes: multiple_outcomes) }
+    let(:multiple_outcomes) { false }
     let(:rc_1) { RulesEngine::Condition.new(name: "Rule Condition 1", condition: "1 == 1") }
 
     context "no root" do
@@ -131,6 +132,29 @@ describe RulesEngine::Walker do
       let(:ro_2) { RulesEngine::Outcome.new(name: "Rule Outcome 2", values: "Outcome 2 Values") }
 
       it { is_expected.to eq(ro_1) }
+    end
+
+    context "for multiple outcomes" do
+      let(:multiple_outcomes) { true }
+
+      context "no root" do
+        let(:root) { nil }
+        it { is_expected.to eq([]) }
+      end
+
+      context "root with multiple conditions and rule outcome" do
+        let(:root) { rc_1 }
+        let(:rc_1) { RulesEngine::Condition.new(name: "Rule Condition 1", condition: "1 == 1", when_true_outcome: ro_1, when_true_condition: rc_2) }
+        let(:rc_2) { RulesEngine::Condition.new(name: "Rule Condition 2", condition: "1 == 1", when_true_outcome: ro_2, when_true_condition: rc_3) }
+        let(:rc_3) { RulesEngine::Condition.new(name: "Rule Condition 3", condition: "1 != 1", when_true_outcome: ro_3, when_false_condition: rc_4) }
+        let(:rc_4) { RulesEngine::Condition.new(name: "Rule Condition 4", condition: "1 == 1", when_true_outcome: ro_4) }
+        let(:ro_1) { RulesEngine::Outcome.new(name: "Rule Outcome 1", values: "Outcome 1 Values") }
+        let(:ro_2) { RulesEngine::Outcome.new(name: "Rule Outcome 2", values: "Outcome 2 Values") }
+        let(:ro_3) { RulesEngine::Outcome.new(name: "Rule Outcome 3", values: "Outcome 3 Values") }
+        let(:ro_4) { RulesEngine::Outcome.new(name: "Rule Outcome 4", values: "Outcome 3 Values") }
+
+        it { is_expected.to eq([ro_1, ro_2, ro_4]) }
+      end
     end
   end
 end
