@@ -24,20 +24,39 @@ Or install it yourself as:
 
 ## Usage
 
-Require everything
+Single outcome:
 
 ```ruby
-require 'rules_engine'
-    @name = options.fetch(:name)
-    @reference = options.fetch(:reference)
-    @parameter = options.fetch(:parameter)
-
-true_outcome = RulesEngine::Outcome.new(reference:'some category', name:'true outcome',parameter:'some parameter')
-false_outcome = RulesEngine::Outcome.new(reference:'some category', 'name:false outcome', parameter:'another parameter')
-root_rule = RulesEngine::Condition.new(name:'condition name', condition:'2 > 1', when_true:true_outcome, when_false:false_outcome)
-set = RulesEngine::Set.new(root:root_rule, name:'rule set name')
-walker = RulesEngine::Walker.new(set:set, object:some_object)
+true_outcome = RulesEngine::Outcome.new(name: "Outcome 1", values: "Outcome 1 Values")
+false_outcome = RulesEngine::Outcome.new(name: "Outcome 2", values: "Outcome 2 Values")
+root = RulesEngine::Condition.new(name: "Root", condition: "2 > 1", when_true: true_outcome, when_false: false_outcome)
+set = RulesEngine::Set.new(name: "Single Outcome", root: root)
+walker = RulesEngine::Walker.new(set: set, event_logger: nil)
 walker.walk
+
+# Executing Rule Set Single Outcome
+# Evaluated condition 2 > 1, result is true (overridden: false)
+# => #<RulesEngine::Outcome:... @name="Outcome 1", @values="Outcome 1 Values">
+```
+
+Multiple outcomes:
+
+```ruby
+outcome_1 = RulesEngine::Outcome.new(name: "Outcome 1", values: "Outcome 1 Values")
+outcome_2 = RulesEngine::Outcome.new(name: "Outcome 2", values: "Outcome 2 Values")
+outcome_3 = RulesEngine::Outcome.new(name: "Outcome 3", values: "Outcome 3 Values")
+outcome_4 = RulesEngine::Outcome.new(name: "Outcome 4", values: "Outcome 4 Values")
+condition_1 = RulesEngine::Condition.new(name: "Condition 1", condition: "2 < 1", when_true_outcome: outcome_3, when_false_outcome: outcome_4)
+root = RulesEngine::Condition.new(name: "Root", condition: "2 > 1", when_true_outcome: outcome_1, when_true_condition: condition_1, when_false_outcome: outcome_2, when_false_condition: condition_1)
+set = RulesEngine::Set.new(name: "Multiple Outcomes", root: root, multiple_outcomes: true)
+walker = RulesEngine::Walker.new(set: set, event_logger: nil)
+walker.walk
+
+# Executing Rule Set Multiple Outcomes
+# Evaluated condition 2 > 1, result is true (overridden: false)
+# Evaluated condition 2 < 1, result is false (overridden: false)
+# => [#<RulesEngine::Outcome:... @name="Outcome 1", @values="Outcome 1 Values">,
+      #<RulesEngine::Outcome:... @name="Outcome 4", @values="Outcome 4 Values">]
 ```
 
 ## Contributing
