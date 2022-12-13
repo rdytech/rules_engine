@@ -6,5 +6,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.6.0] - 2022-12-13
 ### Added
 - Multiple outcomes: the ability to continue walking a tree, returning all outcomes instead of stopping at the first outcome
